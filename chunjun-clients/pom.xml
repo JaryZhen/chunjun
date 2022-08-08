@@ -184,6 +184,8 @@
 									  tofile="${basedir}/target/${artifactId}.jar"/>
 								<copy todir="${basedir}/../lib/"
 									  file="${basedir}/target/${artifactId}.jar"/>
+								<copy todir="${basedir}/../${dist.dir}/"
+									  file="${basedir}/target/${artifactId}.jar"/>
 								<delete>
 									<fileset dir="${basedir}/../lib"
 											 includes="${artifactId}-*.jar"

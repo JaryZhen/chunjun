@@ -30,6 +30,7 @@ import com.dtstack.chunjun.options.Options;
 import com.dtstack.chunjun.util.ExecuteProcessHelper;
 
 import org.apache.flink.client.deployment.ClusterDeploymentException;
+import org.apache.flink.client.program.ClusterClient;
 import org.apache.flink.configuration.ConfigConstants;
 
 import org.apache.commons.lang3.StringUtils;
@@ -116,7 +117,8 @@ public class Launcher {
         URLClassLoader urlClassLoader = (URLClassLoader) Launcher.class.getClassLoader();
         List<URL> jarUrlList = ExecuteProcessHelper.getExternalJarUrls(launcherOptions.getAddjar());
         ClassLoaderManager.loadExtraJar(jarUrlList, urlClassLoader);
-        clusterClientHelper.submit(jobDeployer);
+        ClusterClient client = clusterClientHelper.submit(jobDeployer);
+        client.close();
     }
 
     private static void findDefaultConfigDir(Options launcherOptions)

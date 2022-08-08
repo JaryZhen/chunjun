@@ -208,11 +208,6 @@
 		</dependency>
 		<dependency>
 			<groupId>com.dtstack.chunjun</groupId>
-			<artifactId>chunjun-connector-inceptor</artifactId>
-			<version>${project.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>com.dtstack.chunjun</groupId>
 			<artifactId>chunjun-connector-oceanbase</artifactId>
 			<version>${project.version}</version>
 		</dependency>
@@ -306,7 +301,7 @@
 		<!--Network-->
 
 		<!--Dirty-plugins-->
-		<dependency>
+<!--		<dependency>
 			<groupId>com.dtstack.chunjun</groupId>
 			<artifactId>chunjun-dirty</artifactId>
 			<version>${project.version}</version>
@@ -322,7 +317,7 @@
 			<groupId>com.dtstack.chunjun</groupId>
 			<artifactId>chunjun-dirty-log</artifactId>
 			<version>${project.version}</version>
-		</dependency>
+		</dependency>-->
 
 		<!--Cdc-Restore-plugins-->
 		<dependency>

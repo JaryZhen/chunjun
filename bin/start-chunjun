@@ -36,5 +36,10 @@ fi
 JAR_DIR=$CHUNJUN_HOME/lib/*
 CLASS_NAME=com.dtstack.chunjun.client.Launcher
 
+echo $JAVA_RUN
+echo $CHUNJUN_HOME
+echo $JAR_DIR
+
 echo "ChunJun starting ..."
-nohup $JAVA_RUN -cp $JAR_DIR $CLASS_NAME $@ &
+echo $JAVA_RUN -cp $JAR_DIR $CLASS_NAME $@
+nohup $JAVA_RUN -cp $JAR_DIR $CLASS_NAME $@

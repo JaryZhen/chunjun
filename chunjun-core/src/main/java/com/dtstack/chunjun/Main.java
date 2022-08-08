@@ -121,6 +121,9 @@ public class Main {
             case SYNC:
                 exeSyncJob(env, tEnv, replacedJob, options);
                 break;
+            case PARSE:
+                parseCheck(env, tEnv, replacedJob, options);
+                break;
             default:
                 throw new ChunJunRuntimeException(
                         "unknown jobType: ["
@@ -129,6 +132,25 @@ public class Main {
         }
 
         LOG.info("program {} execution success", options.getJobName());
+    }
+
+    private static void parseCheck(
+            StreamExecutionEnvironment env,
+            StreamTableEnvironment tableEnv,
+            String job,
+            Options options) {
+        try {
+            configStreamExecutionEnvironment(env, options, null);
+            List<URL> jarUrlList = ExecuteProcessHelper.getExternalJarUrls(options.getAddjar());
+            StatementSet statementSet = SqlParser.parseSql(job, jarUrlList, tableEnv);
+            System.out.println("POSEIDON_CHUNJUN_SQL_PARSE_SUCCESS:" + statementSet.explain());
+        } catch (Exception e) {
+            System.out.println("POSEIDON_CHUNJUN_SQL_PARSE_FAILED:" + e.getMessage());
+            throw new ChunJunRuntimeException(e);
+        } finally {
+            FactoryUtil.getFactoryHelperThreadLocal().remove();
+            TableFactoryService.getFactoryHelperThreadLocal().remove();
+        }
     }
 
     /**

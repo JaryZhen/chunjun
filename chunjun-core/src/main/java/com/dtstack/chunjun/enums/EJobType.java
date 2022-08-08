@@ -29,7 +29,8 @@ public enum EJobType {
     /** sql job */
     SQL(0, "sql"),
     /** sync job */
-    SYNC(1, "sync");
+    SYNC(1, "sync"),
+    PARSE(2, "parse");
 
     private int type;
 
@@ -50,6 +51,8 @@ public enum EJobType {
                 return SQL;
             case "sync":
                 return SYNC;
+            case "parse":
+                return PARSE;
             default:
                 throw new RuntimeException("just support sql or sync jobType !!!");
         }
