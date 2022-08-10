@@ -143,9 +143,13 @@ public class Main {
             configStreamExecutionEnvironment(env, options, null);
             List<URL> jarUrlList = ExecuteProcessHelper.getExternalJarUrls(options.getAddjar());
             StatementSet statementSet = SqlParser.parseSql(job, jarUrlList, tableEnv);
-            System.out.println("POSEIDON_CHUNJUN_SQL_PARSE_SUCCESS:" + statementSet.explain());
+            System.out.println(
+                    "POSEIDON_CHUNJUN_SQL_PARSE_SUCCESS_START:" + statementSet.explain());
+            System.out.println("POSEIDON_CHUNJUN_SQL_PARSE_SUCCESS_END:");
+
         } catch (Exception e) {
-            System.out.println("POSEIDON_CHUNJUN_SQL_PARSE_FAILED:" + e.getMessage());
+            System.out.println("POSEIDON_CHUNJUN_SQL_PARSE_FAILED_START:" + e.getMessage());
+            System.out.println("POSEIDON_CHUNJUN_SQL_PARSE_FAILED_END:");
             throw new ChunJunRuntimeException(e);
         } finally {
             FactoryUtil.getFactoryHelperThreadLocal().remove();

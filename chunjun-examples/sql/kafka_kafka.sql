@@ -41,7 +41,7 @@ CREATE TABLE result_total_pvuv_min
     `timestamp-type` STRING,
     partition_id     BIGINT
 ) WITH (
-      'connector' = 'kafka-x',
+      'connector' = 'kafka',
       -- 'connector' = 'kafka-x'
       'topic' = 'sql_test_sink',
       'properties.bootstrap.servers' = 'localhost:9092',
