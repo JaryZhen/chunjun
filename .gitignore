@@ -43,6 +43,7 @@ nohup.out
 
 # chunjun plugins
 chunjun-dist/
+chunjun-dist-copy
 
 */.cache
 */node_modules
