@@ -19,6 +19,8 @@ package com.dtstack.chunjun.local.test;
 
 import com.dtstack.chunjun.Main;
 
+import com.dtstack.chunjun.util.GsonUtil;
+
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -40,6 +42,8 @@ public class LocalTest2 {
     public static void main(String[] args) throws Exception {
         LOG.warn("-----");
         Properties confProperties = new Properties();
+        confProperties.setProperty("execution.savepoint.path", "hdfs://localhost:9000/flink/savepoints/493/savepoint-7d5131-095a88e3a40c");
+
         //        confProperties.setProperty("flink.checkpoint.interval", "30000");
         //        confProperties.setProperty("state.backend","ROCKSDB");
         //        confProperties.setProperty("state.checkpoints.num-retained", "10");
@@ -54,7 +58,7 @@ public class LocalTest2 {
         // 任务配置参数
         List<String> argsList = new ArrayList<>();
         argsList.add("-mode");
-        argsList.add("local");
+        argsList.add("yarn-per-job");//
         // 替换脚本中的值
         // argsList.add("-p");
         // argsList.add("$aa=aaa, $bb=bbb");
@@ -65,16 +69,19 @@ public class LocalTest2 {
             argsList.add("parse"); // parse
             argsList.add("-job");
             argsList.add(URLEncoder.encode(content, StandardCharsets.UTF_8.name()));
-            //            argsList.add("-flinkConfDir");
-            //            argsList.add("/opt/dtstack/flink-1.12.2/conf/");
+            argsList.add("-flinkConfDir");
+            argsList.add("/Users/jary/data/tools/flink-1.12.7/conf");
             argsList.add("-jobName");
             argsList.add("flinkStreamSQLLocalTest");
             argsList.add("-chunjunDistDir");
             argsList.add(chunjunDistDir);
             argsList.add("-remoteChunJunDistDir");
             argsList.add(chunjunDistDir);
-            argsList.add("-pluginLoadMode");
-            argsList.add("LocalTest");
+            //argsList.add("-pluginLoadMode");
+            //argsList.add("LocalTest");
+            argsList.add("-confProp");
+            String configJsonString = GsonUtil.GSON.toJson(confProperties);
+            argsList.add(configJsonString);
         }
         Main.main(argsList.toArray(new String[0]));
     }

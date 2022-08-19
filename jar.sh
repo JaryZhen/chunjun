@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 
-sqlVersionName="flink-sql-1.12-chunjun"
+sqlVersionName="flink-sql-1.12-1.13"
 
 rm -rf ${sqlVersionName}
 cp -R chunjun-dist ${sqlVersionName}

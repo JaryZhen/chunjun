@@ -17,7 +17,7 @@ CREATE TABLE source_ods_fact_user_ippv
 ) WITH (
       'connector' = 'kafka-x',
       'topic' = 'sql_test_source'
-      ,'properties.bootstrap.servers' = 'localhost:9092'
+      ,'properties.bootstrap.servers' = 'localhost:9088'
       ,'properties.group.id' = 'luna_g1'
       ,'scan.startup.mode' = 'latest-offset'
       ,'format' = 'json'
@@ -44,7 +44,7 @@ CREATE TABLE result_total_pvuv_min
       'connector' = 'kafka',
       -- 'connector' = 'kafka-x'
       'topic' = 'sql_test_sink',
-      'properties.bootstrap.servers' = 'localhost:9092',
+      'properties.bootstrap.servers' = 'localhost:9088',
       'format' = 'json',
       'sink.parallelism' = '2'
       -- ,'json.timestamp-format.standard' = 'SQL'
