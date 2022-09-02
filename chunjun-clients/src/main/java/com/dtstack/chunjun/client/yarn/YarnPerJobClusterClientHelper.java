@@ -150,10 +150,12 @@ public class YarnPerJobClusterClientHelper implements ClusterClientHelper {
 
         boolean isRemoteJarPath =
                 !CollectionUtil.isNullOrEmpty(flinkConfig.get(YarnConfigOptions.PROVIDED_LIB_DIRS));
+        LOG.info("isRemoteJarPath={}, " + isRemoteJarPath);
         List<File> shipFiles = new ArrayList<>();
         File[] jars = new File(flinkLibDir).listFiles();
         if (jars != null) {
             for (File jar : jars) {
+                LOG.info("Loading jar {}" + jar.getName());
                 if (jar.toURI().toURL().toString().contains("flink-dist")) {
                     descriptor.setLocalJarPath(new Path(jar.toURI().toURL().toString()));
                 } else if (!isRemoteJarPath) {

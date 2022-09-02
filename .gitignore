@@ -49,3 +49,5 @@ chunjun-dist-copy
 */node_modules
 /website/public
 /website/public/page-data/
+maven_package.sh
+flink-sql-1.12-chunjun

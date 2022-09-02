@@ -17,7 +17,7 @@ CREATE TABLE source_ods_fact_user_ippv
 ) WITH (
       'connector' = 'kafka-x',
       'topic' = 'poseidon-sql'
-      ,'properties.bootstrap.servers' = 'localhost:9088'
+      ,'properties.bootstrap.servers' = 'test-kafka01-public.lkcoffee.com:9092,test-kafka02-public.lkcoffee.com:9092,test-kafka03-public.lkcoffee.com:9092,test-kafka04-public.lkcoffee.com:9092,test-kafka05-public.lkcoffee.com:9092,test-kafka06-public.lkcoffee.com:9092'
       ,'properties.group.id' = 'luna_g1'
       ,'scan.startup.mode' = 'latest-offset'
       ,'format' = 'json'
@@ -43,7 +43,7 @@ CREATE TABLE result_total_pvuv_min
       'connector' = 'kafka-x',
       -- 'connector' = 'kafka-x'
       'topic' = 'poseidon-sql-sink',
-      'properties.bootstrap.servers' = 'localhost:9088',
+      'properties.bootstrap.servers' = 'test-kafka01-public.lkcoffee.com:9092,test-kafka02-public.lkcoffee.com:9092,test-kafka03-public.lkcoffee.com:9092,test-kafka04-public.lkcoffee.com:9092,test-kafka05-public.lkcoffee.com:9092,test-kafka06-public.lkcoffee.com:9092',
       'format' = 'json',
       'sink.parallelism' = '2'
       -- ,'json.timestamp-format.standard' = 'SQL'

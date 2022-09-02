@@ -2,12 +2,6 @@ package com.dtstack.chunjun.client;
 
 import com.dtstack.chunjun.util.GsonUtil;
 
-import junit.framework.TestCase;
-import org.apache.commons.exec.CommandLine;
-import org.apache.commons.exec.DefaultExecuteResultHandler;
-import org.apache.commons.exec.DefaultExecutor;
-import org.apache.commons.exec.ExecuteWatchdog;
-import org.apache.commons.exec.PumpStreamHandler;
 import org.apache.commons.lang.StringUtils;
 import org.junit.Test;
 
@@ -41,14 +35,14 @@ public class LauncherTest {
         String flinkHome = "/Users/jary/data/tools/flink-1.12.7/";
         String hadoopHome = "/Users/jary/IdeaProjects/lk-luckyposeidonx/env-poseidonx/hadoop/dev/";
 
-        String jobPath = userDir + "/chunjun-examples/sql/kafka_kafka.sql";
+        String jobPath = userDir + "/chunjun-examples/sql/datagen.sql";
         String chunjunDistDir = userDir + "/chunjun-dist";
         String s = "";
 
         // 任务配置参数
         List<String> argsList = new ArrayList<>();
         argsList.add("-mode");
-        argsList.add("yarn-per-job");
+        argsList.add("local");//yarn-per-job
         // 替换脚本中的值
         // argsList.add("-p");
         // argsList.add("$aa=aaa, $bb=bbb");
@@ -56,7 +50,7 @@ public class LauncherTest {
         if (StringUtils.endsWith(jobPath, "json")) {
         } else if (StringUtils.endsWith(jobPath, "sql")) {
             argsList.add("-jobType");
-            argsList.add("sql");
+            argsList.add("sql"); // parse
             argsList.add("-job");
             argsList.add(jobPath);
             argsList.add("-jobName");
@@ -72,20 +66,20 @@ public class LauncherTest {
             argsList.add("-hadoopConfDir");
             argsList.add(hadoopHome);
 
-
             Properties confProperties = new Properties();
-            confProperties.setProperty("execution.savepoint.path", "hdfs://localhost:9000/flink/savepoints/493/savepoint-7d5131-095a88e3a40c");
-            confProperties.setProperty("yarn.application.queue","root.flinkdemo");
+            //confProperties.setProperty("yarn.provided.lib.dirs", "true");
+           // confProperties.setProperty("execution.savepoint.path", "hdfs://localhost:9000/flink/savepoints/493/savepoint-7d5131-095a88e3a40c");
+            //confProperties.setProperty("yarn.application.queue", "root.flinkdemo");
 
             //        confProperties.setProperty("flink.checkpoint.interval", "30000");
             //        confProperties.setProperty("state.backend","ROCKSDB");
             //        confProperties.setProperty("state.checkpoints.num-retained", "10");
             //        confProperties.setProperty("state.checkpoints.dir", "hdfs://localhost:9000/ck");
 
-            Map<String, String> config = new HashMap<>();
+/*            Map<String, String> config = new HashMap<>();
             // config.put("state.backend", "ROCKSDB");
             //config.put("state.checkpoints.dir", "hdfs://localhost:9000/ck");
-            config.put("execution.savepoint.path", "hdfs://localhost:9000/flink/savepoints/493/savepoint-7d5131-095a88e3a40c");
+            config.put("execution.savepoint.path", "hdfs://localhost:9000/flink/savepoints/493/savepoint-7d5131-095a88e3a40c");*/
             String configJsonString = GsonUtil.GSON.toJson(confProperties);
             System.out.println(configJsonString);
 
@@ -101,7 +95,7 @@ public class LauncherTest {
             throw new RuntimeException(e);
         }
     }
-
+/*
     @Test
     public void testSavePoint() throws IOException, InterruptedException {
 
@@ -166,7 +160,7 @@ public class LauncherTest {
             executor.execute(commandLine, resultHandler);
         }
         resultHandler.waitFor(timeout);
-    }
+    }*/
 
     private static String readFile(String sqlPath) {
         try {

@@ -18,7 +18,6 @@
 package com.dtstack.chunjun.local.test;
 
 import com.dtstack.chunjun.Main;
-
 import com.dtstack.chunjun.util.GsonUtil;
 
 import org.apache.commons.lang.StringUtils;
@@ -42,7 +41,9 @@ public class LocalTest2 {
     public static void main(String[] args) throws Exception {
         LOG.warn("-----");
         Properties confProperties = new Properties();
-        confProperties.setProperty("execution.savepoint.path", "hdfs://localhost:9000/flink/savepoints/493/savepoint-7d5131-095a88e3a40c");
+        confProperties.setProperty(
+                "execution.savepoint.path",
+                "hdfs://localhost:9000/flink/savepoints/493/savepoint-7d5131-095a88e3a40c");
 
         //        confProperties.setProperty("flink.checkpoint.interval", "30000");
         //        confProperties.setProperty("state.backend","ROCKSDB");
@@ -58,7 +59,7 @@ public class LocalTest2 {
         // 任务配置参数
         List<String> argsList = new ArrayList<>();
         argsList.add("-mode");
-        argsList.add("yarn-per-job");//
+        argsList.add("yarn-per-job"); //
         // 替换脚本中的值
         // argsList.add("-p");
         // argsList.add("$aa=aaa, $bb=bbb");
@@ -77,8 +78,8 @@ public class LocalTest2 {
             argsList.add(chunjunDistDir);
             argsList.add("-remoteChunJunDistDir");
             argsList.add(chunjunDistDir);
-            //argsList.add("-pluginLoadMode");
-            //argsList.add("LocalTest");
+            // argsList.add("-pluginLoadMode");
+            // argsList.add("LocalTest");
             argsList.add("-confProp");
             String configJsonString = GsonUtil.GSON.toJson(confProperties);
             argsList.add(configJsonString);

@@ -488,7 +488,7 @@ public class YarnClusterDescriptor implements ClusterDescriptor<ApplicationId> {
                     jobGraph,
                     detached);
         } catch (Exception e) {
-            throw new ClusterDeploymentException("Could not deploy Yarn job cluster.", e);
+            throw new ClusterDeploymentException("Chunjun Could not deploy Yarn job cluster.", e);
         }
     }
 
